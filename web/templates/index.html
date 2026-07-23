@@ -85,20 +85,12 @@
                     <span class="navbar-brand fw-bold"><i class="bi bi-cup-straw text-warning"></i> Whispers Lounge</span>
                     <div class="d-flex align-items-center gap-2" id="pos-nav-right">
                         <span id="pos-user" class="text-white small d-none d-md-inline"></span>
-                        <button class="btn btn-sm btn-warning d-none" id="nav-sales-attendant" onclick="showScreen('sales-history')"><i class="bi bi-receipt"></i> Sales</button>
-                        <div class="dropdown d-none" id="admin-hamburger">
+                        <div class="dropdown d-none" id="nav-hamburger-attendant">
                             <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-list fs-5"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" style="min-width: 180px; background: #fff; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>My Sales</a></li>
                             </ul>
                         </div>
                         <button class="btn btn-sm btn-danger" onclick="doLogout()"><i class="bi bi-box-arrow-left"></i> End Shift</button>
@@ -179,7 +171,6 @@
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-cup-straw text-warning"></i> Whispers Lounge - Admin</span>
                     <div class="d-flex gap-2 align-items-center">
-                        <button class="btn btn-sm btn-warning" onclick="showScreen('pos')"><i class="bi bi-arrow-left"></i> POS</button>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-list fs-5"></i>
@@ -281,7 +272,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-box-seam"></i> Product Catalog</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3">
@@ -299,7 +304,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-archive"></i> Inventory</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3">
@@ -317,7 +336,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-graph-up"></i> Reports & Analytics</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3">
@@ -379,7 +412,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-speedometer2"></i> Analytics</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3 overflow-auto" style="height: calc(100vh - 56px); height: calc(100dvh - 56px);">
@@ -477,7 +524,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-receipt"></i> Sales History</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3">
@@ -522,7 +583,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-tag"></i> Discounts</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('users')"><i class="bi bi-people me-2"></i>Users</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3">
@@ -539,7 +614,21 @@
             <nav class="navbar navbar-dark navbar-emerald">
                 <div class="container-fluid">
                     <span class="navbar-brand fw-bold"><i class="bi bi-people"></i> User Management</span>
-                    <button class="btn btn-sm btn-warning" onclick="showScreen('dashboard')"><i class="bi bi-arrow-left"></i> Back</button>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list fs-5"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:180px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('dashboard')"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('catalog')"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('inventory')"><i class="bi bi-archive me-2"></i>Inventory</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('sales-history')"><i class="bi bi-receipt me-2"></i>Sales</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('reports')"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('analytics')"><i class="bi bi-speedometer2 me-2"></i>Analytics</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="showScreen('discounts')"><i class="bi bi-tag me-2"></i>Discounts</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <div class="p-3">

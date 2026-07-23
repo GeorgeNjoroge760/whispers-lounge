@@ -102,6 +102,7 @@ async function syncPendingToServer() {
 
 // ========== SCREEN MANAGEMENT ==========
 function showScreen(name) {
+    if (currentUser && currentUser.role === 'admin' && name === 'pos') return;
     const adminScreens = ['dashboard', 'catalog', 'inventory', 'reports', 'analytics', 'discounts', 'users'];
     if (currentUser && currentUser.role === 'attendant' && adminScreens.includes(name)) return;
 
@@ -291,10 +292,8 @@ async function loadPOS() {
 
 function setupNavButtons() {
     const role = currentUser.role;
-    const hamburger = document.getElementById('admin-hamburger');
-    const salesBtn = document.getElementById('nav-sales-attendant');
-    if (hamburger) hamburger.style.display = (role === 'attendant') ? 'none' : 'inline-flex';
-    if (salesBtn) salesBtn.style.display = (role === 'attendant') ? 'inline-flex' : 'none';
+    const attHamburger = document.getElementById('nav-hamburger-attendant');
+    if (attHamburger) attHamburger.style.display = (role === 'attendant') ? 'inline-flex' : 'none';
 }
 
 async function loadCategories() {
