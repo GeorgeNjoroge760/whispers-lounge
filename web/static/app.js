@@ -46,8 +46,7 @@ async function syncFromServer() {
             await db.categories.clear();
             for (const c of cats) await db.categories.add({ id: c.id, name: c.name });
 
-            await db.products.clear();
-            for (const p of products) await db.products.add({
+            for (const p of products) await db.products.put({
                 id: p.id, name: p.name, category_id: p.category_id,
                 price: p.price, cost: p.cost, unit: p.unit || '',
                 barcode: p.barcode, stock_qty: p.stock
@@ -79,7 +78,14 @@ async function syncPendingToServer() {
             if (item.type === 'sale') {
                 await api('/api/sync/sale', 'POST', item.data);
             } else if (item.type === 'product') {
-                await api('/api/products', 'POST', item.data);
+                const res = await api('/api/products', 'POST', item.data);
+                if (res.ok && res.id && item.data._localId) {
+                    const local = await db.products.get(item.data._localId);
+                    if (local) {
+                        await db.products.delete(item.data._localId);
+                        await db.products.put({ ...local, id: res.id });
+                    }
+                }
             } else if (item.type === 'product_edit') {
                 await api('/api/products/' + item.data.id, 'PUT', item.data);
             } else if (item.type === 'inventory') {
@@ -605,10 +611,19 @@ async function saveProduct() {
     const barcode = document.getElementById('m-prod-barcode').value.trim() || null;
     if (!name || !price) return showToast('Name and price required', true);
 
-    const id = Date.now();
+    const data = { name, category_id: catId ? parseInt(catId) : null, price, cost, unit, barcode };
+    let id = null;
+    if (navigator.onLine) {
+        try {
+            const res = await api('/api/products', 'POST', data);
+            if (res.ok) id = res.id;
+        } catch (e) {}
+    }
+    if (!id) id = Date.now();
     await db.products.add({ id, name, category_id: catId ? parseInt(catId) : null, price, cost, unit, barcode, stock_qty: 0 });
-    await db.inventory.add({ product_id: id, stock_qty: 0, min_stock_level: 5, last_restocked: null });
-    await db.pending_sync.add({ type: 'product', data: { name, category_id: catId, price, cost, unit, barcode } });
+    if (!navigator.onLine) {
+        await db.pending_sync.add({ type: 'product', data: { ...data, _localId: id } });
+    }
     closeModal();
     loadCatalog();
     showToast('Product added');
@@ -665,12 +680,17 @@ async function saveProductEdit(productId) {
     const barcode = document.getElementById('m-edit-barcode').value.trim() || null;
     if (!name || !price) return showToast('Name and price required', true);
 
-    await db.products.update(productId, { name, category_id: catId ? parseInt(catId) : null, price, cost, unit, barcode, stock_qty: stockQty });
+    const updateData = { name, category_id: catId ? parseInt(catId) : null, price, cost, unit, barcode, stock_qty: stockQty };
+    await db.products.update(productId, updateData);
     await db.inventory.where('product_id').equals(productId).modify(i => {
         i.stock_qty = stockQty;
         i.min_stock_level = minLevel;
     });
-    await db.pending_sync.add({ type: 'product_edit', data: { id: productId, name, category_id: catId ? parseInt(catId) : null, price, cost, unit, barcode, stock_qty: stockQty } });
+    if (navigator.onLine) {
+        try { await api('/api/products/' + productId, 'PUT', updateData); } catch (e) {}
+    } else {
+        await db.pending_sync.add({ type: 'product_edit', data: { id: productId, ...updateData } });
+    }
     closeModal();
     loadCatalog();
     showToast('Product updated');
@@ -1394,11 +1414,12 @@ function drawHourlyChart(hourly) {
 // ========== INIT ==========
 async function init() {
     await syncFromServer();
+    await syncPendingToServer();
     loadStaff();
-    setInterval(syncFromServer, 30000);
+    setInterval(syncFromServer, 10000);
+    setInterval(syncPendingToServer, 15000);
     window.addEventListener('online', () => {
-        syncFromServer();
-        syncPendingToServer();
+        syncPendingToServer().then(() => syncFromServer());
     });
 }
 
