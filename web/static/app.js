@@ -456,8 +456,6 @@ async function completeSale() {
     }
     let total = Math.max(0, subtotal - discountAmount);
 
-    if (!confirm('Complete sale for $' + total.toFixed(2) + ' (' + payment + ')?')) return;
-
     const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
     const saleId = Date.now();
 
@@ -1236,8 +1234,6 @@ async function completeSaleMobile() {
         else discountAmount = appliedDiscount.value;
     }
     let total = Math.max(0, subtotal - discountAmount);
-
-    if (!confirm('Complete sale for $' + total.toFixed(2) + ' (' + payment + ')?')) return;
 
     const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
     const saleId = Date.now();
