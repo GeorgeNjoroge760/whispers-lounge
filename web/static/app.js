@@ -1411,15 +1411,44 @@ function drawHourlyChart(hourly) {
 }
 
 // ========== INIT ==========
+async function seedDefaults() {
+    const userCount = await db.users.count();
+    if (userCount === 0) {
+        await db.users.bulkAdd([
+            { id: 1, username: 'admin', full_name: 'System Admin', role: 'admin', is_active: 1 },
+            { id: 2, username: 'alice', full_name: 'Alice', role: 'attendant', is_active: 1 },
+            { id: 3, username: 'bob', full_name: 'Bob', role: 'attendant', is_active: 1 }
+        ]);
+    }
+    const catCount = await db.categories.count();
+    if (catCount === 0) {
+        await db.categories.bulkAdd([
+            { id: 1, name: 'Spirits' }, { id: 2, name: 'Beer' }, { id: 3, name: 'Wine' },
+            { id: 4, name: 'Cocktails' }, { id: 5, name: 'Soft Drinks' },
+            { id: 6, name: 'Shisha' }, { id: 7, name: 'Food' }
+        ]);
+    }
+}
+
 async function init() {
+    await seedDefaults();
+    loadStaff();
     await syncFromServer();
     await syncPendingToServer();
     loadStaff();
     setInterval(syncFromServer, 10000);
     setInterval(syncPendingToServer, 15000);
+    updateOfflineBanner();
     window.addEventListener('online', () => {
-        syncPendingToServer().then(() => syncFromServer());
+        updateOfflineBanner();
+        syncPendingToServer().then(() => syncFromServer()).then(() => loadStaff());
     });
+    window.addEventListener('offline', updateOfflineBanner);
+}
+
+function updateOfflineBanner() {
+    const banner = document.getElementById('offline-banner');
+    if (banner) banner.classList.toggle('d-none', navigator.onLine);
 }
 
 init();
