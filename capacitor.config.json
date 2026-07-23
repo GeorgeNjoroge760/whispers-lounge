@@ -1,0 +1,8 @@
+{
+  "appId": "com.whisperslounge.pos",
+  "appName": "Whispers Lounge",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

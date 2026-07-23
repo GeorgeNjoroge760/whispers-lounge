@@ -1,0 +1,5 @@
+from controllers.auth import AuthController
+from controllers.product_ctrl import ProductController
+from controllers.sales_ctrl import SalesController
+from controllers.inventory_ctrl import InventoryController
+from controllers.report_ctrl import ReportController

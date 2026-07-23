@@ -1,0 +1,706 @@
+#:set NAV_COLOR 0.086, 0.396, 0.204, 1
+#:set NAV_DARK 0.078, 0.325, 0.176, 1
+#:set ACCENT 0.886, 0.647, 0.149, 1
+#:set BG_PRIMARY 0.961, 0.961, 0.941, 1
+#:set BG_CREAM 0.98, 0.973, 0.953, 1
+#:set BG_WHITE 1, 1, 1, 1
+#:set TEXT_PRIMARY 0.133, 0.133, 0.133, 1
+#:set TEXT_DARK 0, 0, 0, 1
+#:set TEXT_MUTED 0.533, 0.533, 0.533, 1
+#:set TEXT_WHITE 1, 1, 1, 1
+#:set SUCCESS 0.153, 0.682, 0.376, 1
+#:set DANGER 0.863, 0.208, 0.271, 1
+#:set BORDER 0.878, 0.878, 0.878, 1
+
+<Manager>:
+    canvas.before:
+        Color:
+            rgba: BG_PRIMARY
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<StaffSelectScreen>:
+    canvas.before:
+        Color:
+            rgba: BG_CREAM
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(40)
+        spacing: dp(10)
+
+        Widget:
+            size_hint_y: 0.12
+
+        Label:
+            text: '\u2615'
+            font_size: dp(64)
+            color: ACCENT
+            size_hint_y: 0.12
+
+        Label:
+            text: 'Whispers Lounge'
+            font_size: dp(32)
+            bold: True
+            color: NAV_COLOR
+            size_hint_y: 0.08
+
+        Label:
+            text: 'Select attendant to start'
+            font_size: dp(14)
+            color: TEXT_MUTED
+            size_hint_y: 0.04
+
+        Widget:
+            size_hint_y: 0.03
+
+        GridLayout:
+            id: staff_grid
+            cols: 2
+            spacing: dp(10)
+            padding: dp(10)
+            size_hint_y: 0.35
+
+        Widget:
+            size_hint_y: 0.03
+
+        Button:
+            text: '\U0001f512  Admin Login'
+            font_size: dp(14)
+            bold: True
+            size_hint: 0.5, None
+            height: dp(44)
+            pos_hint: {'center_x': 0.5}
+            background_color: BG_CREAM
+            background_normal: BG_CREAM
+            color: NAV_COLOR
+            on_press: root.go_admin_login()
+
+        Widget:
+            size_hint_y: 0.1
+
+<AdminLoginScreen>:
+    canvas.before:
+        Color:
+            rgba: BG_CREAM
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(36)
+        spacing: dp(12)
+
+        Widget:
+            size_hint_y: 0.18
+
+        Label:
+            text: '\u2615'
+            font_size: dp(48)
+            color: ACCENT
+            size_hint_y: 0.08
+
+        Label:
+            text: 'Whispers Lounge'
+            font_size: dp(28)
+            bold: True
+            color: NAV_COLOR
+            size_hint_y: 0.06
+
+        Label:
+            text: 'Admin Login'
+            font_size: dp(13)
+            color: TEXT_MUTED
+            size_hint_y: 0.03
+
+        Widget:
+            size_hint_y: 0.02
+
+        TextInput:
+            id: admin_user
+            hint_text: 'Username'
+            font_size: dp(16)
+            multiline: False
+            size_hint: 1, None
+            height: dp(48)
+            padding: [dp(12), dp(12)]
+            background_color: BG_WHITE
+            cursor_color: TEXT_PRIMARY
+            foreground_color: TEXT_PRIMARY
+
+        TextInput:
+            id: admin_pass
+            hint_text: 'Password'
+            font_size: dp(16)
+            password: True
+            multiline: False
+            size_hint: 1, None
+            height: dp(48)
+            padding: [dp(12), dp(12)]
+            background_color: BG_WHITE
+            cursor_color: TEXT_PRIMARY
+            foreground_color: TEXT_PRIMARY
+
+        Label:
+            id: admin_error
+            text: ''
+            font_size: dp(12)
+            color: DANGER
+            size_hint_y: 0.03
+
+        Button:
+            text: 'Login'
+            font_size: dp(16)
+            bold: True
+            size_hint: 1, None
+            height: dp(50)
+            background_color: NAV_COLOR
+            background_normal: NAV_COLOR
+            color: TEXT_WHITE
+            on_press: root.do_login()
+
+        Button:
+            text: '\u2190 Back to staff selection'
+            font_size: dp(13)
+            size_hint: 1, None
+            height: dp(40)
+            background_color: BG_CREAM
+            background_normal: BG_CREAM
+            color: TEXT_MUTED
+            on_press: root.go_back()
+
+        Widget:
+            size_hint_y: 0.22
+
+<PosScreen>:
+    canvas.before:
+        Color:
+            rgba: BG_PRIMARY
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(48)
+            padding: [dp(12), 0]
+            canvas.before:
+                Color:
+                    rgba: NAV_COLOR
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: '\u2615  Whispers Lounge'
+                font_size: dp(15)
+                bold: True
+                color: TEXT_WHITE
+                halign: 'left'
+                text_size: self.size
+                valign: 'middle'
+            Label:
+                id: pos_user_label
+                text: ''
+                font_size: dp(12)
+                color: TEXT_WHITE
+            Button:
+                text: 'Logout'
+                font_size: dp(11)
+                size_hint: None, None
+                size: dp(70), dp(30)
+                pos_hint: {'center_y': 0.5}
+                background_color: DANGER
+                background_normal: DANGER
+                color: TEXT_WHITE
+                on_press: root.logout()
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(6)
+            spacing: dp(4)
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(40)
+                id: cat_bar
+                spacing: dp(4)
+                padding: [dp(4), 0]
+
+            TextInput:
+                id: search_input
+                hint_text: '\U0001f50d  Search products...'
+                font_size: dp(13)
+                multiline: False
+                size_hint_y: None
+                height: dp(40)
+                padding: [dp(10), dp(9)]
+                background_color: BG_WHITE
+                cursor_color: TEXT_PRIMARY
+                foreground_color: TEXT_PRIMARY
+                on_text: root.filter_products()
+
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(6)
+
+                ScrollView:
+                    do_scroll_x: False
+                    GridLayout:
+                        id: product_grid
+                        cols: 3
+                        spacing: dp(5)
+                        padding: dp(3)
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.38
+                    spacing: dp(4)
+                    canvas.before:
+                        Color:
+                            rgba: BG_WHITE
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                    BoxLayout:
+                        size_hint_y: None
+                        height: dp(38)
+                        padding: [dp(10), 0]
+                        canvas.before:
+                            Color:
+                                rgba: NAV_COLOR
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                        Label:
+                            text: '\U0001f6d2  Current Order'
+                            font_size: dp(12)
+                            bold: True
+                            color: TEXT_WHITE
+                            halign: 'left'
+                            text_size: self.size
+                            valign: 'middle'
+
+                    ScrollView:
+                        do_scroll_x: False
+                        GridLayout:
+                            id: cart_list
+                            cols: 1
+                            spacing: dp(3)
+                            padding: dp(4)
+                            size_hint_y: None
+                            height: self.minimum_height
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(180)
+                        padding: dp(8)
+                        spacing: dp(3)
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(34)
+                            TextInput:
+                                id: disc_input
+                                hint_text: 'Discount code'
+                                font_size: dp(11)
+                                multiline: False
+                                padding: [dp(8), dp(8)]
+                                background_color: BG_PRIMARY
+                                cursor_color: TEXT_PRIMARY
+                                foreground_color: TEXT_PRIMARY
+                            Button:
+                                text: 'Apply'
+                                font_size: dp(11)
+                                size_hint_x: 0.35
+                                background_color: ACCENT
+                                background_normal: ACCENT
+                                color: TEXT_DARK
+                                on_press: root.apply_discount()
+
+                        Label:
+                            id: disc_label
+                            text: ''
+                            font_size: dp(10)
+                            color: NAV_COLOR
+                            size_hint_y: None
+                            height: dp(16)
+
+                        Label:
+                            id: subtotal_label
+                            text: 'Subtotal: $0.00'
+                            font_size: dp(12)
+                            color: TEXT_MUTED
+                            halign: 'left'
+                            text_size: self.size
+                            size_hint_y: None
+                            height: dp(18)
+
+                        Label:
+                            id: total_label
+                            text: 'TOTAL: $0.00'
+                            font_size: dp(20)
+                            bold: True
+                            color: NAV_COLOR
+                            halign: 'left'
+                            text_size: self.size
+                            size_hint_y: None
+                            height: dp(28)
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(34)
+                            spacing: dp(4)
+                            ToggleButton:
+                                text: 'Cash'
+                                group: 'payment'
+                                state: 'down'
+                                font_size: dp(11)
+                                background_color: BG_PRIMARY
+                                background_normal: BG_PRIMARY
+                                color: TEXT_PRIMARY
+                                on_state: root.set_payment('Cash') if self.state == 'down' else None
+                            ToggleButton:
+                                text: 'Card'
+                                group: 'payment'
+                                font_size: dp(11)
+                                background_color: BG_PRIMARY
+                                background_normal: BG_PRIMARY
+                                color: TEXT_PRIMARY
+                                on_state: root.set_payment('Card') if self.state == 'down' else None
+                            ToggleButton:
+                                text: 'Mobile'
+                                group: 'payment'
+                                font_size: dp(11)
+                                background_color: BG_PRIMARY
+                                background_normal: BG_PRIMARY
+                                color: TEXT_PRIMARY
+                                on_state: root.set_payment('Mobile') if self.state == 'down' else None
+
+                        Button:
+                            text: 'COMPLETE SALE'
+                            font_size: dp(15)
+                            bold: True
+                            size_hint_y: None
+                            height: dp(42)
+                            background_color: NAV_COLOR
+                            background_normal: NAV_COLOR
+                            color: TEXT_WHITE
+                            on_press: root.complete_sale()
+
+<ProductButton@Button>:
+    background_color: BG_WHITE
+    background_normal: BG_WHITE
+    color: TEXT_PRIMARY
+    font_size: dp(11)
+    size_hint_y: None
+    height: dp(85)
+    text_size: self.size
+    valign: 'top'
+    halign: 'center'
+    padding: [dp(6), dp(6)]
+    canvas.before:
+        Color:
+            rgba: BORDER
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+            width: 1
+
+<DashboardScreen>:
+    canvas.before:
+        Color:
+            rgba: BG_PRIMARY
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(48)
+            padding: [dp(12), 0]
+            canvas.before:
+                Color:
+                    rgba: NAV_COLOR
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: '\u2615  Whispers Lounge - Admin'
+                font_size: dp(15)
+                bold: True
+                color: TEXT_WHITE
+                halign: 'left'
+                text_size: self.size
+                valign: 'middle'
+            Button:
+                text: '\u2190 POS'
+                font_size: dp(11)
+                size_hint: None, None
+                size: dp(60), dp(30)
+                pos_hint: {'center_y': 0.5}
+                background_color: ACCENT
+                background_normal: ACCENT
+                color: TEXT_DARK
+                on_press: root.go_pos()
+
+        GridLayout:
+            cols: 2
+            spacing: dp(8)
+            padding: dp(12)
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(75)
+                padding: dp(12)
+                canvas.before:
+                    Color:
+                        rgba: BG_WHITE
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10)]
+                Label:
+                    text: "Today's Revenue"
+                    font_size: dp(11)
+                    color: TEXT_MUTED
+                Label:
+                    id: revenue_label
+                    text: '$0.00'
+                    font_size: dp(22)
+                    bold: True
+                    color: NAV_COLOR
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(75)
+                padding: dp(12)
+                canvas.before:
+                    Color:
+                        rgba: BG_WHITE
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10)]
+                Label:
+                    text: 'Transactions'
+                    font_size: dp(11)
+                    color: TEXT_MUTED
+                Label:
+                    id: tx_label
+                    text: '0'
+                    font_size: dp(22)
+                    bold: True
+                    color: ACCENT
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(75)
+                padding: dp(12)
+                canvas.before:
+                    Color:
+                        rgba: BG_WHITE
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10)]
+                Label:
+                    text: 'Discounts'
+                    font_size: dp(11)
+                    color: TEXT_MUTED
+                Label:
+                    id: disc_total_label
+                    text: '$0.00'
+                    font_size: dp(22)
+                    bold: True
+                    color: DANGER
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(75)
+                padding: dp(12)
+                canvas.before:
+                    Color:
+                        rgba: BG_WHITE
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10)]
+                Label:
+                    text: 'Low Stock'
+                    font_size: dp(11)
+                    color: TEXT_MUTED
+                Label:
+                    id: low_stock_label
+                    text: '0'
+                    font_size: dp(22)
+                    bold: True
+                    color: DANGER
+
+        ScrollView:
+            GridLayout:
+                cols: 2
+                spacing: dp(8)
+                padding: dp(12)
+                size_hint_y: None
+                height: self.minimum_height
+
+                Button:
+                    text: '\U0001f4b0\nProducts'
+                    font_size: dp(14)
+                    bold: True
+                    size_hint_y: None
+                    height: dp(90)
+                    background_color: BG_WHITE
+                    background_normal: BG_WHITE
+                    color: NAV_COLOR
+                    on_press: root.go_catalog()
+
+                Button:
+                    text: '\U0001f4e6\nInventory'
+                    font_size: dp(14)
+                    bold: True
+                    size_hint_y: None
+                    height: dp(90)
+                    background_color: BG_WHITE
+                    background_normal: BG_WHITE
+                    color: NAV_COLOR
+                    on_press: root.go_inventory()
+
+                Button:
+                    text: '\U0001f4c8\nReports'
+                    font_size: dp(14)
+                    bold: True
+                    size_hint_y: None
+                    height: dp(90)
+                    background_color: BG_WHITE
+                    background_normal: BG_WHITE
+                    color: NAV_COLOR
+                    on_press: root.go_reports()
+
+                Button:
+                    text: '\U0001f3f7\ufe0f\nDiscounts'
+                    font_size: dp(14)
+                    bold: True
+                    size_hint_y: None
+                    height: dp(90)
+                    background_color: BG_WHITE
+                    background_normal: BG_WHITE
+                    color: NAV_COLOR
+                    on_press: root.go_discounts()
+
+                Button:
+                    text: '\U0001f465\nUsers'
+                    font_size: dp(14)
+                    bold: True
+                    size_hint_y: None
+                    height: dp(90)
+                    background_color: BG_WHITE
+                    background_normal: BG_WHITE
+                    color: NAV_COLOR
+                    on_press: root.go_users()
+
+<GenericListScreen>:
+    canvas.before:
+        Color:
+            rgba: BG_PRIMARY
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(48)
+            padding: [dp(12), 0]
+            canvas.before:
+                Color:
+                    rgba: NAV_COLOR
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                id: screen_title
+                text: ''
+                font_size: dp(15)
+                bold: True
+                color: TEXT_WHITE
+                halign: 'left'
+                text_size: self.size
+                valign: 'middle'
+            Button:
+                text: '\u2190 Back'
+                font_size: dp(11)
+                size_hint: None, None
+                size: dp(60), dp(30)
+                pos_hint: {'center_y': 0.5}
+                background_color: ACCENT
+                background_normal: ACCENT
+                color: TEXT_DARK
+                on_press: root.go_back()
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(46)
+            padding: [dp(10), dp(5)]
+            spacing: dp(6)
+
+            Button:
+                id: action_btn1
+                text: ''
+                font_size: dp(12)
+                size_hint_x: 0.4
+                background_color: NAV_COLOR
+                background_normal: NAV_COLOR
+                color: TEXT_WHITE
+                on_press: root.on_action1()
+
+            Button:
+                id: action_btn2
+                text: ''
+                font_size: dp(12)
+                size_hint_x: 0.3
+                background_color: DANGER
+                background_normal: DANGER
+                color: TEXT_WHITE
+                on_press: root.on_action2()
+
+            TextInput:
+                id: search_input
+                hint_text: 'Search...'
+                font_size: dp(12)
+                multiline: False
+                size_hint_x: 0.3
+                padding: [dp(8), dp(8)]
+                background_color: BG_WHITE
+                cursor_color: TEXT_PRIMARY
+                foreground_color: TEXT_PRIMARY
+                on_text: root.on_search()
+
+        ScrollView:
+            GridLayout:
+                id: item_list
+                cols: 1
+                spacing: dp(3)
+                padding: dp(6)
+                size_hint_y: None
+                height: self.minimum_height
